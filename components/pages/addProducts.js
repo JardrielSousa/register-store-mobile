@@ -23,6 +23,19 @@ const AddProduct = () => {
           valueProduct
       });
   }
+  function deleteProduct(id){
+      database.collection('produtos').doc(id).delete();
+  }
+
+  function changeProduct(id){
+    database.collection('produtos').doc(id).update(
+        {
+            nameProduct,
+            valueProduct
+        }
+    );
+
+  }
   return (
     <SafeAreaView style={styles.marginTop}>
       <TextInput
@@ -40,7 +53,9 @@ const AddProduct = () => {
       />
       <Button title="Sent" onPress={addProduto}></Button>
       {products.map((prod) => {
-          return <Text key={prod.id}>{prod.nameProduct} - {prod.valueProduct}</Text>
+          return <Text key={prod.id}>{prod.nameProduct} - {prod.valueProduct}
+          <Button title='Atualizar'  onPress={()=>changeProduct(prod.id)}></Button>
+          <Button title='Deletar' style={styles.cancelButton} onPress={()=>deleteProduct(prod.id)}></Button></Text>
       })}
     </SafeAreaView>
   );
@@ -54,6 +69,10 @@ const styles = StyleSheet.create({
   },
   marginTop:{
     marginTop:250
+  },
+  cancelButton:{
+      textShadowColor: 'red',
+      color:'red'
   }
 });
 
