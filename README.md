@@ -38,6 +38,8 @@ Contributors names and contact info
 - https://github.com/JardrielSousa
 
 ## Version History
+0.2
+features - was implemented the methods of delete and change products
 0.1
 Initial Release - was created the insert and list the products
 ## License
