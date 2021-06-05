@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
-import { Alert, Button, SafeAreaView, StyleSheet, TextInput ,Text} from "react-native";
-import {database} from '../../config/config'
+import { Alert, Button, SafeAreaView, StyleSheet, TextInput ,Text ,FlatList, TouchableOpacity} from "react-native";
+import {database} from '../../config/config';
+import styles from '../../style/addProducts';
 
 const AddProduct = () => {
   const [nameProduct, onChangeNameProduct] = React.useState('');
@@ -18,26 +19,42 @@ const AddProduct = () => {
   });
 
   function addProduto(){
+    if(nameProduct != "" && valueProduct != ""){
       database.collection('produtos').add({
-          nameProduct,
-          valueProduct
-      });
+        nameProduct,
+        valueProduct
+    });
+    }else{
+      Alert.alert('Os campos não podem ser vazios!!');
+      console.log('Os campos não podem ser vazios!!')
+    }
   }
   function deleteProduct(id){
+    if(id != ""){
       database.collection('produtos').doc(id).delete();
+    }else{
+      Alert.alert('Não foi identificado o ID do produto!!');
+      console.log('Não foi identificado o ID do produto!!')
+    }
   }
 
   function changeProduct(id){
-    database.collection('produtos').doc(id).update(
+    if(nameProduct != "" && valueProduct != ""){
+      database.collection('produtos').doc(id).update(
         {
             nameProduct,
             valueProduct
         }
-    );
-
+      );
+    }else{
+      Alert.alert('Os campos não podem ser vazios!!');
+      console.log('Os campos não podem ser vazios!!')
+    }
   }
+
   return (
-    <SafeAreaView style={styles.marginTop}>
+    <SafeAreaView style={styles.container}>
+      <Text style={styles.title}>Cadastro de Produtos</Text>
       <TextInput
         style={styles.input}
         onChangeText={onChangeNameProduct}
@@ -51,29 +68,23 @@ const AddProduct = () => {
         placeholder="Valor"
         keyboardType="numeric"
       />
-      <Button title="Sent" onPress={addProduto}></Button>
-      {products.map((prod) => {
-          return <Text key={prod.id}>{prod.nameProduct} - {prod.valueProduct}
-          <Button title='Atualizar'  onPress={()=>changeProduct(prod.id)}></Button>
-          <Button title='Deletar' style={styles.cancelButton} onPress={()=>deleteProduct(prod.id)}></Button></Text>
-      })}
+      <TouchableOpacity onPress={addProduto}>
+                <Text style={styles.registerButton} >Cadastrar</Text>
+        </TouchableOpacity>
+        <Text style={styles.title}>Lista de Produtos</Text>
+      <FlatList
+          data={products}
+          renderItem={({item}) => <Text>{item.nameProduct} - {item.valueProduct}
+           <TouchableOpacity onPress={()=>changeProduct(item.id)}>
+                <Text style={styles.changeButton} >Alterar</Text>
+          </TouchableOpacity>
+          <TouchableOpacity color="#E63529" onPress={()=>deleteProduct(item.id)}>
+                <Text style={styles.cancelButton} >Deletar</Text>
+          </TouchableOpacity>
+          </Text>}
+        />
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  input: {
-    height: 40,
-    margin: 12,
-    borderWidth: 1,
-  },
-  marginTop:{
-    marginTop:250
-  },
-  cancelButton:{
-      textShadowColor: 'red',
-      color:'red'
-  }
-});
 
 export default AddProduct;
