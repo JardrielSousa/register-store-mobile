@@ -38,6 +38,9 @@ Contributors names and contact info
 - https://github.com/JardrielSousa
 
 ## Version History
+- 0.2.1 
+bug fixes - bug fixes in the compile version mobile
+features - changes in the screens 
 - 0.2
 features - was implemented the methods of delete and change products
 - 0.1
