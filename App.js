@@ -6,7 +6,7 @@ function Index() {
   return (
   <View>
     <Header />
-    <AddProducts />;
+    <AddProducts />
   </View>);
   
 }

@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
       textAlign:'center'
     },
     input: {
-      height: 40,
+      height: 50,
       margin: 15,
       borderBottomWidth:1,
       padding:15,
@@ -27,18 +27,14 @@ const styles = StyleSheet.create({
     },
     changeButton:{
       height: 40,
-      margin: 15,
       padding:10,
       borderRadius:10,
       color:'#40C2FF',
     },
     cancelButton:{
-      marginLeft:10,
       borderRadius:50,
       borderRadius:10
-    },
-    list:{
-      margin:10,
+    },list:{
       textAlign:'center'
     }
   });

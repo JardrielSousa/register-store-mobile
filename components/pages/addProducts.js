@@ -72,13 +72,14 @@ const AddProduct = () => {
                 <Text style={styles.registerButton} >Cadastrar</Text>
         </TouchableOpacity>
         <Text style={styles.title}>Lista de Produtos</Text>
-      <FlatList
+      <FlatList style={styles.list}
           data={products}
-          renderItem={({item}) => <Text>{item.nameProduct} - {item.valueProduct}
-           <TouchableOpacity onPress={()=>changeProduct(item.id)}>
+          renderItem={({item}) => 
+          <Text style={styles.list}>{item.nameProduct} - {item.valueProduct}
+           <TouchableOpacity style={styles.list} onPress={()=>changeProduct(item.id)}>
                 <Text style={styles.changeButton} >Alterar</Text>
           </TouchableOpacity>
-          <TouchableOpacity color="#E63529" onPress={()=>deleteProduct(item.id)}>
+          <TouchableOpacity style={styles.list} color="#E63529" onPress={()=>deleteProduct(item.id)}>
                 <Text style={styles.cancelButton} >Deletar</Text>
           </TouchableOpacity>
           </Text>}
